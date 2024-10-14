@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url Home</title>
+    <style>
+      body {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Short URL</h1>
+    <% if (locals.url) { %>
+      <a href="/">Home</a>
+    <ul>
+      <li>
+        <%= locals.url %> -
+        <a href="<%= locals.url %>">Go This Page</a>
+      </li>
+    </ul>
+    <% } %>
+
+    <form method="post" action="./url">
+      <input type="url" required placeholder="Original URL..." name="mainUrl" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <% if (locals.urls) { %>
+    <h1>Table Data</h1>
+    <table>
+      <th>
+        <thead>
+          <th>S. No</th>
+          <th>Main URL</th>
+          <th>Redirect ID</th>
+          <th>Redirect URL</th>
+          <th>Click</th>
+          <th>Analytics</th>
+        </thead>
+        <tbody>
+          <% locals.urls.forEach((data,index) => { %>
+
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= data.mainUrl %></td>
+            <td><%= data.shortUrl %></td>
+            <td>http://localhost:3000/url/<%= data.shortUrl %></td>
+            <td><%= data.history.length %></td>
+            <td>Coming Soon</td>
+          </tr>
+
+          <% }) %>
+        </tbody>
+      </th>
+    </table>
+    <% } %>
+  </body>
+</html>
