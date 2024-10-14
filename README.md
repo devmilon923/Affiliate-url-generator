@@ -26,6 +26,34 @@ This project follows the Model-View-Controller (MVC) architectural pattern to se
 
 ## Installation
 
+
 1. Clone the repository:
+   
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/devmilon923/affiliate-url-generator.git
+
+2. Navigate to the project directory:
+   
+   ```bash
+   cd <project-directory>
+
+3. Install the dependencies:
+   
+   ```bash
+   npm install
+
+4. Set up your MongoDB connection in the connection.js file:
+   
+   ```bash
+   const mongoose = require("mongoose");
+
+   async function dbConnect() {
+     return mongoose.connect(
+       "Your Database URL"
+     );
+   }
+
+5. Start the server:
+   
+   ```bash
+   npm start
