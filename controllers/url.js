@@ -9,6 +9,7 @@ async function handleUrlPost(req, res) {
       mainUrl: mainUrl,
       shortUrl: shortUrl,
       history: [],
+      createBy: req.userInfo._id,
     });
     res.status(201).render("home", {
       url: `http://localhost:3000/url/${result.shortUrl}`,
@@ -35,7 +36,6 @@ async function handleUrlVisit(req, res) {
     }
   );
   res.redirect(data.mainUrl);
- 
 }
 function handleUrlGet(req, res) {
   res.redirect("/");

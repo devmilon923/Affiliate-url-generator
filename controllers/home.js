@@ -1,11 +1,12 @@
-const express = require("express");
-const route = express.Router();
 const Url = require("../models/url");
 
-route.get("/", async (req, res) => {
+async function showAllUrls(req, res) {
   try {
-    const allUrl = await Url.find({});
-    console.log(allUrl[0]._id);
+
+    const allUrl = await Url.find({
+      createBy: req.userInfo._id,
+    });
+
     return res.render("home", {
       urls: allUrl,
     });
@@ -14,6 +15,8 @@ route.get("/", async (req, res) => {
       error: "Somthing want worng!",
     });
   }
-});
+}
 
-module.exports = route;
+module.exports = {
+  showAllUrls,
+};
