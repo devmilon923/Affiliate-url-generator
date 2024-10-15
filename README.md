@@ -15,6 +15,7 @@ This project is an Affiliate URL Generator that allows users to create and track
 - **Express.js**: Web framework for Node.js to build web applications.
 - **MongoDB**: NoSQL database for storing affiliate link data.
 - **Mongoose**: ODM (Object Data Modeling) library for MongoDB and Node.js, used for data modeling.
+- **Login/Create**: Users can log in, create an account, and the link will follow them.
 
 ## MVC Architecture
 
@@ -22,7 +23,7 @@ This project follows the Model-View-Controller (MVC) architectural pattern to se
 
 ## Future Enhancements
 
-- **Login/Logout Functionality**: Currently not implemented but planned for future updates.
+- **Logout Functionality**: Currently not implemented but planned for future updates.
 
 ## Installation
 
@@ -52,8 +53,12 @@ This project follows the Model-View-Controller (MVC) architectural pattern to se
        "Your Database URL"
      );
    }
+5. Add your private JWT token in service/service.js:
+   
+   ```bash
+   const privateKey = "Your Private Key";
 
-5. Start the server:
+6. Start the server:
    
    ```bash
    npm start
