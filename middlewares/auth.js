@@ -40,7 +40,7 @@ function role(roles) {
     if (
       roles.length <= 1 &&
       !roles.includes("ADMIN") &&
-      !roles.includes("NORMAL")
+      !roles.includes("USER")
     )
       return res.end("Unauthorized");
     if (!roles.includes(req.userInfo.permission))

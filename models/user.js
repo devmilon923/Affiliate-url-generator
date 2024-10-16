@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema(
     permission: {
       type: String,
       require: true,
-      default: "NORMAL",
+      default: "USER",
     },
   },
   { timestamps: true }

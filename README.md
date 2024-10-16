@@ -8,6 +8,8 @@ This project is an Affiliate URL Generator that allows users to create and track
 - **Track Clicks**: The application tracks how many times each affiliate link is clicked.
 - **Visit History**: View all visit history for each affiliate link, including the original URL and the date of creation.
 - **Content UI**: A user-friendly interface to interact with the application.
+- **Login/Create**: Users can log in, create an account, and the link will follow them.
+- **Role-Based Authentication**: Users can log in, create an account, and access links based on their roles.
 
 ## Tech Stack
 
@@ -15,7 +17,6 @@ This project is an Affiliate URL Generator that allows users to create and track
 - **Express.js**: Web framework for Node.js to build web applications.
 - **MongoDB**: NoSQL database for storing affiliate link data.
 - **Mongoose**: ODM (Object Data Modeling) library for MongoDB and Node.js, used for data modeling.
-- **Login/Create**: Users can log in, create an account, and the link will follow them.
 
 ## MVC Architecture
 
@@ -23,7 +24,7 @@ This project follows the Model-View-Controller (MVC) architectural pattern to se
 
 ## Future Enhancements
 
-- **Logout Functionality**: Currently not implemented but planned for future updates.
+- **WebSocket Render Functionality**: Currently not implemented but planned for future updates.
 
 ## Installation
 
@@ -62,3 +63,19 @@ This project follows the Model-View-Controller (MVC) architectural pattern to se
    
    ```bash
    npm start
+
+
+## Role Add in your Route:
+- **Update User Model**: Add one more field in your 'User' model.
+
+   ```bash
+   permission: {
+      type: String,
+      require: true,
+      default: "NORMAL",
+    },
+
+- **Modify Your Routes**: Use role(['ADMIN','USER']) currently this two are working but following our code you can change it easily (Recommended to add this role() middlewares before auth middlewares).
+
+   ```bash
+   route.get("/", auth, role(["ADMIN", "USER"]), YourRouteController);
