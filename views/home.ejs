@@ -21,9 +21,7 @@
 
       <% if (locals.url) { %>
       <div class="mb-4">
-        <a href="/" class="text-blue-600 hover:underline"
-          ><< Go Back</a
-        >
+        <a href="/" class="text-blue-600 hover:underline"><< Go Back</a>
         <ul class="list-disc ml-5 mt-2">
           <li>
             <span class="font-semibold"><%= locals.url %></span> -
@@ -52,6 +50,13 @@
         >
           Submit
         </button>
+        <a href="/admin/urls" class="bg-white border p-3">Admin View</a>
+        <a href="/" class="bg-white border p-3 mt-2">User View</a>
+        <a
+          href="/logout"
+          class="bg-red-500 text-white border lg:w-1/5 text-center mt-2 text-sm block p-3"
+          >LOGOUT</a
+        >
       </form>
 
       <% if (locals.urls) { %>

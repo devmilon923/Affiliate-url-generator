@@ -15,6 +15,11 @@ const userSchema = mongoose.Schema(
       type: Number,
       require: true,
     },
+    permission: {
+      type: String,
+      require: true,
+      default: "NORMAL",
+    },
   },
   { timestamps: true }
 );

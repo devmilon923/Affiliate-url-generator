@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 async function dbConnect() {
   return mongoose.connect(
-    "Your Database URL"
+    "You Database URL"
   );
 }
 

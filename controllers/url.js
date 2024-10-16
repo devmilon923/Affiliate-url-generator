@@ -20,6 +20,23 @@ async function handleUrlPost(req, res) {
     });
   }
 }
+
+
+
+async function handleAllUrl(req, res) {
+  try {
+    const allUrl = await Url.find({});
+
+    return res.render("home", {
+      urls: allUrl,
+    });
+  } catch (error) {
+    return res.status(404).render("home", {
+      error: "Somthing want worng!",
+    });
+  }
+}
+
 async function handleUrlVisit(req, res) {
   const id = req.params.id;
   console.log(id);
@@ -44,4 +61,5 @@ module.exports = {
   handleUrlPost,
   handleUrlVisit,
   handleUrlGet,
+  handleAllUrl,
 };

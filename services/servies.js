@@ -7,6 +7,7 @@ function setCookie(userData) {
       {
         name: userData.name,
         email: userData.email,
+        permission: userData.permission,
       },
       privateKey
     );

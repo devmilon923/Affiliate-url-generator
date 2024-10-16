@@ -3,7 +3,6 @@ const User = require("../models/user");
 
 async function auth(req, res, next) {
   const cookie = req.cookies.token;
-  console.log("Cookie:", cookie);
 
   // Check if cookie is missing
   if (!cookie) {
@@ -20,8 +19,7 @@ async function auth(req, res, next) {
     }
 
     const user = await User.findOne({ email: verifyResult.email });
-    
-    
+
     // If user is found, attach user info to the request object
     if (user) {
       req.userInfo = user;
@@ -36,4 +34,19 @@ async function auth(req, res, next) {
   }
 }
 
-module.exports = auth;
+function role(roles) {
+  return function (req, res, next) {
+   
+    if (
+      roles.length <= 1 &&
+      !roles.includes("ADMIN") &&
+      !roles.includes("NORMAL")
+    )
+      return res.end("Unauthorized");
+    if (!roles.includes(req.userInfo.permission))
+      return res.end("Unauthorized");
+    return next();
+  };
+}
+
+module.exports = { auth, role };

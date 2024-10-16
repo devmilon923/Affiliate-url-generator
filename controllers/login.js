@@ -1,7 +1,5 @@
 const User = require("../models/user");
-const {setCookie} = require("../services/servies");
-
-
+const { setCookie } = require("../services/servies");
 
 function showLogin(req, res) {
   res.render("login");
@@ -13,13 +11,13 @@ async function postLogin(req, res) {
   });
   if (find) {
     const token = setCookie(find);
-    if (token===null) return res.redirect("/login");
-  
+    if (token === null) return res.redirect("/login");
+
     res.cookie("token", token);
     res.redirect("/");
   } else {
-    res.render("login",{
-      error: 'User not found!'
+    res.render("login", {
+      error: "User not found!",
     });
   }
 }
