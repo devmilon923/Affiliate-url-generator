@@ -37,7 +37,6 @@ async function handleAllUrl(req, res) {
 
 async function handleUrlVisit(req, res) {
   const id = req.params.id;
-
   const data = await Url.findOneAndUpdate(
     {
       shortUrl: id,
