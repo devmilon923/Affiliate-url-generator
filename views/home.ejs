@@ -17,8 +17,10 @@
   </head>
   <body class="bg-gray-100 text-gray-800">
     <div class="container mx-auto p-6">
-      <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">
-        Create Affiliate URL
+      <h1
+        class="lg:text-4xl md:text-3xl text-2xl font-extrabold text-center text-gray-800 mb-8"
+      >
+        Affiliate URL
       </h1>
 
       <% if (locals.url) { %>
@@ -102,8 +104,7 @@
             target="_blank"
             class="text-blue-600 hover:underline break-all mb-2 block"
           >
-            https://shortaffi.up.railway.app/url/<%=
-            data.shortUrl %>
+            https://shortaffi.up.railway.app/url/<%= data.shortUrl %>
           </a>
           <p class="text-sm font-medium text-gray-500 mb-1">Clicks:</p>
           <p class="text-gray-600 mb-2"><%= data.history.length %></p>
