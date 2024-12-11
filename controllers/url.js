@@ -12,7 +12,7 @@ async function handleUrlPost(req, res) {
       createBy: req.userInfo._id,
     });
     res.status(201).render("home", {
-      url: `https://affiliate-url-generator-production.up.railway.app/${result.shortUrl}`,
+      url: `https://shortaffi.up.railway.app/url/${result.shortUrl}`,
     });
   } catch (error) {
     res.status(501).render("home", {
