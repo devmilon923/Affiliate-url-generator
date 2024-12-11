@@ -37,7 +37,7 @@ async function handleAllUrl(req, res) {
 
 async function handleUrlVisit(req, res) {
   const id = req.params.id;
-  console.log(id);
+
   const data = await Url.findOneAndUpdate(
     {
       shortUrl: id,
@@ -47,12 +47,18 @@ async function handleUrlVisit(req, res) {
         history: {
           timestamp: Date.now(),
         },
+      },
+      $addToSet: {
         ip: {
           ipAddress: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
         },
       },
+    },
+    {
+      new: true, // আপডেট হওয়া ডকুমেন্ট ফেরত দেবে
     }
   );
+
   res.redirect(data.mainUrl);
 }
 function handleUrlGet(req, res) {
