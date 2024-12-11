@@ -27,6 +27,7 @@ async function handleAllUrl(req, res) {
 
     return res.render("home", {
       urls: allUrl,
+      user: req.userInfo,
     });
   } catch (error) {
     return res.status(404).render("home", {
