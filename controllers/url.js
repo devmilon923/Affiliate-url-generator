@@ -12,7 +12,7 @@ async function handleUrlPost(req, res) {
       createBy: req.userInfo._id,
     });
     res.status(201).render("home", {
-      url: `http://localhost:3000/url/${result.shortUrl}`,
+      url: `https://affiliate-url-generator-production.up.railway.app/${result.shortUrl}`,
     });
   } catch (error) {
     res.status(501).render("home", {
