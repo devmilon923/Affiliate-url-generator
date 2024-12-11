@@ -16,85 +16,105 @@
     </style>
   </head>
   <body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-4">
-      <h1 class="text-3xl font-bold mb-4">Create Affiliate URL</h1>
+    <div class="container mx-auto p-6">
+      <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">
+        Create Affiliate URL
+      </h1>
 
       <% if (locals.url) { %>
-      <div class="mb-4">
-        <a href="/" class="text-blue-600 hover:underline"><< Go Back</a>
-        <ul class="list-disc ml-5 mt-2">
+      <div class="mb-6">
+        <a
+          href="/"
+          class="text-blue-600 hover:text-blue-800 font-medium transition"
+          ><i class="fa-solid fa-backward"></i> Go Back</a
+        >
+        <ul class="list-disc ml-6 mt-4">
           <li>
-            <span class="font-semibold"><%= locals.url %></span> -
+            <span class="font-semibold text-gray-800"><%= locals.url %></span> -
             <a
               target="_blank"
               href="<%= locals.url %>"
               class="text-blue-600 hover:underline"
-              >Go And Check</a
+              >Visit Link</a
             >
           </li>
         </ul>
       </div>
       <% } %>
 
-      <form method="post" action="./url" class="mb-4">
-        <input
-          type="url"
-          required
-          placeholder="Original URL..."
-          name="mainUrl"
-          class="border rounded p-2 w-full"
-        />
-        <button
-          type="submit"
-          class="bg-blue-600 text-white font-semibold p-2 rounded mt-2"
-        >
-          Submit
-        </button>
-        <a href="/admin/urls" class="bg-white border p-3">Admin View</a>
-        <a href="/" class="bg-white border p-3 mt-2">User View</a>
-        <a
-          href="/logout"
-          class="bg-red-500 text-white border lg:w-1/5 text-center mt-2 text-sm block p-3"
-          >LOGOUT</a
-        >
+      <form method="post" action="./url" class="mb-8">
+        <div class="flex flex-col gap-4">
+          <input
+            type="url"
+            required
+            placeholder="Enter Original URL..."
+            name="mainUrl"
+            class="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div class="flex flex-wrap gap-4">
+            <button
+              type="submit"
+              class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              Submit
+            </button>
+            <a
+              href="/admin/urls"
+              class="bg-gray-100 border px-6 py-2 rounded-lg hover:bg-gray-200"
+              >Admin View</a
+            >
+            <a
+              href="/"
+              class="bg-gray-100 border px-6 py-2 rounded-lg hover:bg-gray-200"
+              >User View</a
+            >
+            <a
+              href="/logout"
+              class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition"
+            >
+              LOGOUT
+            </a>
+          </div>
+        </div>
       </form>
 
-      <% if (locals.urls) { %>
-      <h2 class="text-2xl font-bold mb-4">Your Affiliate Data</h2>
-      <table
-        class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg"
-      >
-        <thead>
-          <tr class="bg-gray-200 text-gray-600">
-            <th class="border px-4 py-2">S. No</th>
-            <th class="border px-4 py-2">Main URL</th>
-            <th class="border px-4 py-2">Redirect ID</th>
-            <th class="border px-4 py-2">Redirect URL</th>
-            <th class="border px-4 py-2">Click</th>
-            <th class="border px-4 py-2">Analytics</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% locals.urls.forEach((data, index) => { %>
-          <tr class="hover:bg-gray-100">
-            <td class="border px-4 py-2"><%= index + 1 %></td>
-            <td class="border px-4 py-2"><%= data.mainUrl %></td>
-            <td class="border px-4 py-2"><%= data.shortUrl %></td>
-            <td class="border px-4 py-2">
-              <a
-                target="_blank"
-                href="http://localhost:3000/url/<%= data.shortUrl %>"
-                >http://localhost:3000/url/<%= data.shortUrl %></a
-              >
-            </td>
-            <td class="border px-4 py-2"><%= data.history.length %></td>
-            <td class="border px-4 py-2">
-              <a href="/analytics/<%=  data._id %>">See more</a>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <% if (locals.urls && locals.user) { %>
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Affiliate Data</h2>
+      <div class="mb-6">
+        <p>Email: <%=locals.user.email %></p>
+        <p>Name: <%=locals.user.name %></p>
+        <p>Total URL: <%=locals.urls.length %></p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <% locals.urls.forEach((data, index) => { %>
+        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
+          <h3 class="text-lg font-bold text-gray-700 mb-2">
+            Affiliate #<%= index + 1 %>
+          </h3>
+          <p class="text-sm font-medium text-gray-500 mb-1">Main URL:</p>
+          <p class="text-gray-600 break-all mb-2"><%= data.mainUrl %></p>
+          <p class="text-sm font-medium text-gray-500 mb-1">Redirect ID:</p>
+          <p class="text-gray-600 mb-2"><%= data.shortUrl %></p>
+          <p class="text-sm font-medium text-gray-500 mb-1">Redirect URL:</p>
+          <a
+            href="http://localhost:3000/url/<%= data.shortUrl %>"
+            target="_blank"
+            class="text-blue-600 hover:underline break-all mb-2 block"
+          >
+            http://localhost:3000/url/<%= data.shortUrl %>
+          </a>
+          <p class="text-sm font-medium text-gray-500 mb-1">Clicks:</p>
+          <p class="text-gray-600 mb-2"><%= data.history.length %></p>
+          <a
+            href="/analytics/<%= data._id %>"
+            class="text-blue-600 hover:underline font-medium"
+          >
+            See Analytics
+          </a>
+        </div>
+        <% }) %>
+      </div>
       <% } %>
     </div>
   </body>

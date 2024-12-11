@@ -1,5 +1,6 @@
 // All packages
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const cookieParser = require("cookie-parser");
 
@@ -40,6 +41,6 @@ app.use("/login", loginRoute);
 app.use("/create", createRoute);
 
 // listen app on 3000 port
-app.listen(3000, () => {
-  console.log("Server is running at 3000 port");
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server is running at ${process.env.PORT || 3000} port`);
 });

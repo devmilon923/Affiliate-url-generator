@@ -21,8 +21,6 @@ async function handleUrlPost(req, res) {
   }
 }
 
-
-
 async function handleAllUrl(req, res) {
   try {
     const allUrl = await Url.find({});
@@ -48,6 +46,9 @@ async function handleUrlVisit(req, res) {
       $push: {
         history: {
           timestamp: Date.now(),
+        },
+        ip: {
+          ipAddress: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
         },
       },
     }

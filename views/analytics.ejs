@@ -1,39 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URL Analytics</title>
     <link
-        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-        rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
     />
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
+    <script
+      src="https://kit.fontawesome.com/020e5c9f96.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     <% if (locals.visits) { %>
-        <div class="w-full max-w-3xl">
-            <h1 class="text-2xl font-bold mb-4 text-center">URL Analytics</h1>
-            <div class="text-center mb-2">
-                <a href="/"><< Back to Home</a>
-            </div>
+    <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">
+        URL Analytics
+      </h1>
 
-            <div class="grid grid-cols-1 gap-4">
-                <div class="bg-white shadow-md rounded-lg p-4">
-                    <p class="text-lg">Original URL: <%= locals.visits.mainUrl %></p>
-                    <p class="text-lg">Redirect ID: <%= locals.visits.shortUrl %></p>
-                    <p class="text-gray-600">Created Time: <%= new Date(locals.visits.createdAt).toLocaleString() %></p>
-                    <p class="text-gray-600">Total Clicks: <%= locals.visits.history.length %></p>
-                    <h3 class="text-md font-semibold mt-2">Visit Times:</h3>
-                    <ul class="list-disc pl-5">
-                        <% locals.visits.history.forEach(data => { %>
-                            <li><%= new Date(data.timestamp).toLocaleString() %></li>
-                        <% }) %>
-                    </ul>
-                </div>
-            </div>
+      <div class="text-center mb-4">
+        <a
+          href="/"
+          class="text-blue-600 hover:text-blue-800 font-medium transition duration-200"
+        >
+          <i class="fa-solid fa-backward"></i> Back to Home
+        </a>
+      </div>
+
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md">
+        <div class="mb-4">
+          <p class="text-lg font-semibold text-gray-700">Original URL:</p>
+          <p class="text-gray-600 break-all"><%= locals.visits.mainUrl %></p>
         </div>
+
+        <div class="mb-4">
+          <p class="text-lg font-semibold text-gray-700">Redirect ID:</p>
+          <p class="text-gray-600 break-all"><%= locals.visits.shortUrl %></p>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-lg font-semibold text-gray-700">Created Time:</p>
+          <p class="text-gray-600">
+            <%= new Date(locals.visits.createdAt).toLocaleString() %>
+          </p>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-lg font-semibold text-gray-700">Total Clicks:</p>
+          <p class="text-gray-600"><%= locals.visits.history.length %></p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold text-gray-700 mb-2">Visit Times:</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <% locals.visits.history.map((data, idx) => { %>
+            <li class="text-gray-600">
+              <span class="font-medium">
+                <%= new Date(data.timestamp).toLocaleString() %>
+              </span>
+              <span class="text-red-500 ml-2">
+                (<%= locals.visits.ip[idx]?.ipAddress %>)
+              </span>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
     <% } else { %>
-        <p class="text-center text-red-500">No data available.</p>
+    <p class="text-center text-red-500 font-medium">No data available.</p>
     <% } %>
-</body>
+  </body>
 </html>

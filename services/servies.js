@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const privateKey = "Your Private Key";
+const privateKey = process.env.PrivateKey;
 
 function setCookie(userData) {
   try {

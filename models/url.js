@@ -12,10 +12,10 @@ const urlSchema = mongoose.Schema(
       unique: true,
     },
     history: [{ timestamp: { type: Number } }],
+    ip: [{ ipAddress: { type: String } }],
     createBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      
     },
   },
 
